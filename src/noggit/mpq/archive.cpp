@@ -71,10 +71,10 @@ namespace noggit
 
       if (SFileOpenFileEx (_archive_handle, "(listfile)", 0, &file_handle))
       {
-        const size_t filesize (SFileGetFileSize (file_handle));
+        const size_t filesize (SFileGetFileSize (file_handle, NULL));
 
         char* readbuffer (new char[filesize]);
-        SFileReadFile (file_handle, readbuffer, filesize);
+        SFileReadFile (file_handle, readbuffer, filesize, NULL, NULL);
         SFileCloseFile (file_handle);
         _listfile = QString::fromAscii (readbuffer, filesize).toLower().split ("\r\n", QString::SkipEmptyParts);
 
@@ -119,10 +119,10 @@ namespace noggit
                   );
       if (opened)
       {
-        *size = SFileGetFileSize (file_handle);
+        *size = SFileGetFileSize (file_handle, NULL);
         *buffer = new char[*size];
 
-        SFileReadFile (file_handle, *buffer, *size);
+        SFileReadFile (file_handle, *buffer, *size, NULL, NULL);
         SFileCloseFile (file_handle);
       }
 
@@ -131,7 +131,7 @@ namespace noggit
 
     void archive::save_to_disk()
     {
-        if(SFileCompactArchive(_archive_handle) && SFileCloseArchive(_archive_handle))
+        if(SFileCompactArchive(_archive_handle, NULL, NULL) && SFileCloseArchive(_archive_handle))
             LogDebug << "Saved MPQ to disk" << std::endl;
         else
             LogError << "Error: " << GetLastError()<< "while saving MPQ to disk" << std::endl;
