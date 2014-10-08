@@ -1,0 +1,5 @@
+repo: dc741c9b5a1923e97b40dd3a83fca7d8e72898e6
+node: e966b774e6aefdd3884c2fd0ee99fbab1f39e805
+branch: sdl
+latesttag: sdl1.3
+latesttagdistance: 34
